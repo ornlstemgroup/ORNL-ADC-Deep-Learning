@@ -3,7 +3,7 @@
 This repository is to hold algorithms and data associated with paper "Quantifying Atomically Dispersed Catalysts Using Deep Learning Assisted Microscopy
 ". The Network is pretrained to use, no further training required.
 
-An example notebook is updated for users as reference. To use, clone the repository locally
+An example notebook is updated for users as reference. To use, clone the repository locally. Follow the steps described in notebook (change the filepath accordingly).
 
 ## Dependencies
 
