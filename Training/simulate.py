@@ -23,7 +23,7 @@ def calculate_kernel(dimension=(256, 256), sigma=10.0): # gaussian kernel
 
     return kernel
 
-def convolution(image, kernel): # naive 2D convolution
+def convolution(image, kernel): # naiive 2D convolution
     assert 2 == len(image.shape)
     assert 2 == len(kernel.shape)
     return cv2.filter2D(src=image, kernel=kernel, ddepth=-1)
@@ -38,7 +38,6 @@ def simulate(dimension=(512, 512), range_of_columns=(20, 50), sigma=45, max_inte
     row_coords = np.random.randint(offset, row-offset, columns)
     col_coords = np.random.randint(offset, col-offset, columns)
     intensities = np.random.randint(1, max_intensity, columns)
-    print(intensities)
 
     image = np.zeros(dimension)
     gt = np.zeros(dimension)
@@ -60,14 +59,15 @@ def simulate(dimension=(512, 512), range_of_columns=(20, 50), sigma=45, max_inte
     kernel = calculate_kernel(sigma=sigma, dimension=(row>>1, col>>1))  # 512 * 512 -> 256 * 256
     image = convolution(image=image, kernel=kernel)
     image = filters.gaussian_filter(image, sigma=1)
-    image = random_noise(image, mode='localvar',clip=False)
-    image = random_noise(image, mode='poisson',clip=False)
-    image = random_noise(image, mode='speckle',clip=False)
-    image = random_noise(image, mode='s&p',clip=False)
+    image = random_noise(image, mode='localvar')
+    image = random_noise(image, mode='poisson')
+    image = random_noise(image, mode='speckle')
+    image = random_noise(image, mode='s&p')
+
     # histogram matching
     # image = match_histograms(image, reference, channel_axis=-1)
-    #image = normalize(image)
-    # image = rank.equalize(image, disk(20)) / 255
+    image = normalize(image)
+    image = rank.equalize(image, disk(20)) / 255
     # imageio.imsave('image.jpg', image)
     # exit(0)
 
