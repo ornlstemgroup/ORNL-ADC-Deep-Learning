@@ -13,3 +13,4 @@ conda install -c conda-forge opencv
 pip install scikit-image
 pip install imageio-ffmpeg
 ```
+This algorithm is available under an open-source license for non-commercial academic use, but a custom license is required for commercial use.
